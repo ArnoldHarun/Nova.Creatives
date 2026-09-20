@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nova Creatives</title>
+    <style>
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            min-height: 100vh;
+        }
+        
+        .slide-container {
+            max-width: 900px;
+            margin: 20px auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .slide-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        img { 
+            width: 100%; 
+            display: block; 
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            transition: transform 0.3s ease;
+        }
+        
+        img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        /* Loading animation */
+        .loader {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            padding: 50px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container"><img src="slide1.png"></div>
+    <div class="slide-container"><img src="slide2.png"></div>
+    <div class="slide-container"><img src="slide3.png"></div>
+    <!-- Add more slides here -->
+
+    <script>
+        // Fade in slides as you scroll
+        const slides = document.querySelectorAll('.slide-container');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        slides.forEach(slide => observer.observe(slide));
+    </script>
+
+</body>
+</html>
